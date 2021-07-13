@@ -9,7 +9,6 @@ resource ase 'Microsoft.Web/hostingEnvironments@2019-08-01' = {
   kind: 'ASEV3'
   location: location
   properties: {
-    dedicatedHostCount:'0'
     zoneRedundant: false
     InternalLoadBalancingMode: 0
     virtualNetwork: {
