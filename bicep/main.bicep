@@ -1,6 +1,6 @@
 param location string
 
-//var suffix = uniqueString(resourceGroup().id)
+var suffix = uniqueString(resourceGroup().id)
 
 module vnet 'modules/vnet/vnet.bicep' = {
   name: 'vnet'
@@ -9,3 +9,11 @@ module vnet 'modules/vnet/vnet.bicep' = {
   }
 }
 
+module web 'modules/web/ase.bicep' = {
+  name: 'web'
+  params: {
+    location: location
+    suffix: suffix
+    subnetId: vnet.outputs.subnetId
+  }
+}
