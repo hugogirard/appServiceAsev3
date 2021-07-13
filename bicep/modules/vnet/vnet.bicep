@@ -21,5 +21,15 @@ resource subnet 'Microsoft.Network/virtualNetworks/subnets@2020-06-01' = {
   name: '${virtualNetwork.name}/${subnetName}'
   properties: {
     addressPrefix: subnetCidr
+    delegations: [
+      {
+        name: 'ase-delegation'
+        properties: {
+          serviceName: 'Microsoft.Web/hostingEnvironments'
+        }
+      }
+    ]
+    privateEndpointNetworkPolicies: 'Enabled'
+    privateLinkServiceNetworkPolicies: 'Enabled'    
   }
 }
