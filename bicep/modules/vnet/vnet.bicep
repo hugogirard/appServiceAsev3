@@ -1,9 +1,8 @@
 param location string
-
-var vnetName = 'vnet-ase'
-var VNET_CIDR = '10.0.0.0/16'
-var subnetName = 'aseSubnet'
-var subnetCidr = '10.0.1.0/24'
+param vnetName string
+param VNET_CIDR string
+param subnetName string
+param subnetCidr string
 
 resource virtualNetwork 'Microsoft.Network/virtualNetworks@2020-06-01' = {
   name: vnetName
