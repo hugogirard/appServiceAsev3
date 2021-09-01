@@ -1,0 +1,22 @@
+name: Destroy Azure Resources
+
+on:
+  workflow_dispatch:
+
+env:
+  RESOURCE_GROUP: 'rg-ase-demo'
+
+jobs:
+  destroy-apim:
+    runs-on: ubuntu-latest
+          
+    steps:      
+    
+      - name: Azure Login
+        uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}    
+    
+      - name: Destroy Resource Group
+        run: |
+          az group delete -n ${{ env.RESOURCE_GROUP }} --yes      
