@@ -4,6 +4,11 @@ param VNET_CIDR string
 param subnetName string
 param subnetCidr string
 
+resource nsg 'Microsoft.Network/networkSecurityGroups@2021-02-01' = {
+  name: 'nsg-ase'
+  location: location
+}
+
 resource virtualNetwork 'Microsoft.Network/virtualNetworks@2020-06-01' = {
   name: vnetName
   location: location
@@ -20,6 +25,9 @@ resource subnet 'Microsoft.Network/virtualNetworks/subnets@2020-06-01' = {
   name: '${virtualNetwork.name}/${subnetName}'
   properties: {
     addressPrefix: subnetCidr
+    networkSecurityGroup: {
+      id: nsg.id
+    }
     delegations: [
       {
         name: 'ase-delegation'
